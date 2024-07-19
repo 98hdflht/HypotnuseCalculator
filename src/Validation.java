@@ -1,21 +1,21 @@
 public class Validation {
-    private final String lineEnd;
 
-    public Validation() {
-        this.lineEnd = "\n";
-    }
+    // Validates if the input is a valid double and returns an error message if not
+    public String isDouble(String input, String fieldName) {
 
-    public Validation(String lineEnd) {
-        this.lineEnd = lineEnd;
-    }
-
-    public String isDouble(String value, String name) {
-        String msg = "";
-        try {
-            Double.parseDouble(value);
-        } catch (NumberFormatException e) {
-            msg = name + " must enter a valid number." + lineEnd;
+        if (input == null || input.trim().isEmpty()) {
+            return fieldName + " cannot be empty.\n";
         }
-        return msg;
+        try {
+            double value = Double.parseDouble(input);
+            if (value > 0) {
+                return "";
+            } else {
+                return fieldName + " must be a positive number.\n";
+            }
+        } catch (NumberFormatException e) {
+
+            return fieldName + " must be a valid number.\n";
+        }
     }
 }
